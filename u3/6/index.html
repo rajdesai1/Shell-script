@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sample validation</title>
+
+    <script>
+        function validate() {
+            var x = document.getElementById('ftext').value;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", 'index.php?text=' + x, true)
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('d').innerHTML = this.responseText;
+                }
+            }
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <label for="ftext">Enter text:</label>
+        <input type="text" name="ftext" id="ftext" onkeyup="validate()">
+
+        <div id="d"></div>
+    </form>
+</body>
+</html>

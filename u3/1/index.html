@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Hello Student</title>
+
+    <script>
+        
+        function getname() {
+            var inputField = document.getElementById('name').value;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "index.php?name=" + inputField, true);
+
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState === 4 && xhr.status === 200){
+                    document.getElementById('message').innerHTML = xhr.responseText;
+                }
+            }
+            xhr.send();
+        }
+        
+    </script>
+</head>
+<body>
+    <form>
+
+        <label for="name">Name: </label>
+        <input type="text" id='name' name="name" onkeydown="getname()">
+    </form>
+    <br/><br/>
+
+    <div id="message"></div>
+</body>
+</html>

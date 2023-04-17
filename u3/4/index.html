@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Hello Student</title>
+
+    <script>
+        
+        function idChange() {
+            var inputField = document.getElementById('proname').value;
+
+            console.log(inputField);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "index.php?proid=" + inputField, true);
+
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState === 4 && xhr.status === 200){
+                    document.getElementById('message').innerHTML = xhr.responseText;
+                }
+            }
+            xhr.send();
+        }
+        
+    </script>
+</head>
+<body>
+    <form>
+
+        <label for="proname">Product name: </label>
+        <select name="proname" id="proname" onchange="idChange()">
+            <option value="pro1">pro1</option>
+            <option value="pro2">pro2</option>
+            <option value="pro3">pro3</option>
+        </select>
+    </form>
+    <br/><br/>
+
+    <div id="message"></div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Hello Student</title>
+
+    <script>
+
+        function setGender() {
+            var inputField = document.getElementsByName('gender');
+
+            var a = '';
+
+            for (var i = 0; i < inputField.length; i++) {
+                if (inputField[i].checked) {
+                    a = inputField[i].value;
+                }
+            }
+
+            console.log(a);
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "index.php?gender=" + a, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('d1').innerHTML = xhr.responseText;
+                }
+            }
+            xhr.send();
+        }
+
+        function setHobby() {
+            var hobby = document.getElementsByName('s');
+
+            var b = '';
+
+            for (var i = 0; i < hobby.length; i++) {
+                if (hobby[i].checked) {
+                    b += " " + hobby[i].value;
+                }
+            }
+
+            var xml1 = new XMLHttpRequest();
+            xml1.onreadystatechange = function () {
+                if (this.status === 200 && this.readyState === 4) {
+                    document.getElementById("d2").innerHTML = this.responseText;
+                }
+            }
+            xml1.open("GET", "index.php?hobby=" + b, true)
+            xml1.send();
+        }
+
+    </script>
+</head>
+
+<body>
+    <form>
+        <input type="radio" value="male" name="gender" onchange="setGender()">Male
+        <input type="radio" value="female" name="gender" onchange="setGender()">Female
+        <div id="d1"></div>
+
+        <input type="checkbox" name="s" value="cricket" onclick="setHobby()">Cricket
+        <input type="checkbox" name="s" value="football" onclick="setHobby()">Foot ball
+        <input type="checkbox" name="s" value="hockey" onclick="setHobby()">Hockey
+        <input type="checkbox" name="s" value="vollyball" onclick="setHobby()">Volly Ball
+        <div id="d2"></div>
+    </form>
+    <br /><br />
+
+    <div id="message"></div>
+</body>
+
+</html>
